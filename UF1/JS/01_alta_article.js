@@ -7,6 +7,7 @@ function inici() {
     loadForat();
     loadMides();
     loadPassadis();
+    loadAlta();
 }
 
 function dropdown() {
@@ -19,7 +20,7 @@ function dropdown() {
     }
 }
 
-function comprobarCodi() {
+function comprovarCodi() {
     var codi = document.getElementsByTagName("input")[0].value;
     var select = document.getElementsByTagName("select")[0].value;
     codi = codi.substring(0,3).toLowerCase() + codi.substring(3, codi.length);
@@ -30,14 +31,16 @@ function comprobarCodi() {
     
     if (reg_codi.test(codi)) {
         document.getElementsByTagName("img")[0].src = "../IMG/tick.png";
+        return true;
     }else{
         document.getElementsByTagName("img")[0].src = "../IMG/creu.png";
+        return false;
     }
 }
 
 function loadCodi() {
     var codi = document.getElementsByTagName("input")[0];
-    codi.addEventListener("change", comprobarCodi);
+    codi.addEventListener("change", comprovarCodi);
 }
 
 function obtenirLletra(codi) {
@@ -81,31 +84,37 @@ function obtenirLletra(codi) {
         case 9:
            lletra = "Z";
             break;
+
+        default:
+            lletra = ""
+            break;
     }
     
     return lletra;
 }
 
-function comprobarMides(){
+function comprovarMides(){
     var amplada = document.getElementsByTagName("input")[2].value;
     var llargada = document.getElementsByTagName("input")[3].value;
     var alçada = document.getElementsByTagName("input")[4].value;
 
-    //comprobar contingut amplada
-    var amplada_correcte = comprobarContingutMides(amplada, 1);
-    //comprobar contingut llargada
-    var llargada_correcte = comprobarContingutMides(llargada, 2);
-    //comprobar contingut alçada
-    var alçada_correcte = comprobarContingutMides(alçada, 3);
+    //comprovar contingut amplada
+    var amplada_correcte = comprovarContingutMides(amplada, 1);
+    //comprovar contingut llargada
+    var llargada_correcte = comprovarContingutMides(llargada, 2);
+    //comprovar contingut alçada
+    var alçada_correcte = comprovarContingutMides(alçada, 3);
 
     if (amplada_correcte && llargada_correcte && alçada_correcte) {
         document.getElementsByTagName("p")[0].innerHTML = amplada + " x " + llargada + " x " + alçada;
+        return true;
     }else{
         document.getElementsByTagName("p")[0].innerHTML = "";
+        return false;
     }
 }
 
-function comprobarContingutMides(mida, numero) {
+function comprovarContingutMides(mida, numero) {
     //S'accepta numeros sense o amb decimals(amb coma o punt): 3 | 3,3 | 3.3
     if (/^(\d+|\d+\,\d+|\d+\.\d+)$/.test(mida)) {
         document.getElementsByTagName("img")[numero].src = "../IMG/tick.png";
@@ -118,50 +127,88 @@ function comprobarContingutMides(mida, numero) {
 
 function loadMides() {
     var mides = document.getElementsByTagName("div")[0];
-    mides.addEventListener("change", comprobarMides);
+    mides.addEventListener("change", comprovarMides);
 }
 
-function comprobarPassadis() {
+function comprovarPassadis() {
     var passadis = document.getElementsByTagName("input")[5].value;
     var reg_passadis = new RegExp("^" + "P" + "-" + "[0-9]{2}" + "-" + "(E|D)"+ "$");
     if (reg_passadis.test(passadis)) {
         document.getElementsByTagName("img")[4].src = "../IMG/tick.png";
+        return true;
     }else{
         document.getElementsByTagName("img")[4].src = "../IMG/creu.png";
+        return false;
     }
 }
 
 function loadPassadis() {
     var passadis = document.getElementsByTagName("input")[5];
-    passadis.addEventListener("change", comprobarPassadis);
+    passadis.addEventListener("change", comprovarPassadis);
 }
 
-function comprobarEstanteria() {
+function comprovarEstanteria() {
     var estanteria = document.getElementsByTagName("input")[6].value;
-    var reg_estanteria = new RegExp("^" + "EST" + "-" + "[0-9]{2}" + "\\." + "[0-9]{2}"+ "$");
+    var reg_estanteria = new RegExp("^" + "EST" + "\\+" + "[0-9]{2}" + "\\." + "[0-9]{2}"+ "$");
     if (reg_estanteria.test(estanteria)) {
         document.getElementsByTagName("img")[5].src = "../IMG/tick.png";
+        return true;
     }else{
         document.getElementsByTagName("img")[5].src = "../IMG/creu.png";
+        return false;
     }
 }
 
 function loadEstanteria() {
     var estanteria = document.getElementsByTagName("input")[6];
-    estanteria.addEventListener("change", comprobarEstanteria);
+    estanteria.addEventListener("change", comprovarEstanteria);
 }
 
-function comprobarForat() {
+function comprovarForat() {
     var forat = document.getElementsByTagName("input")[7].value;
     var reg_forat = new RegExp("^" + "[0-9]{2}" + "\\*" + "[A-Z]{3}" + "\\*" + "[0-9]{2}" + "\\\\" + "[0-9]{2}" + "$", "i");
     if (reg_forat.test(forat)) {
         document.getElementsByTagName("img")[6].src = "../IMG/tick.png";
+        return true;
     }else{
         document.getElementsByTagName("img")[6].src = "../IMG/creu.png";
+        return false;
     }
 }
 
 function loadForat() {
     var forat = document.getElementsByTagName("input")[7];
-    forat.addEventListener("change", comprobarForat);
+    forat.addEventListener("change", comprovarForat);
+}
+
+function donarAlta() {
+    var familia = document.getElementsByTagName("select")[0].value;
+    var codi = document.getElementsByTagName("input")[0].value;
+    var nom = document.getElementsByTagName("input")[1].value;
+    var caracteristiques = document.getElementsByTagName("p")[0].value;
+    var passadis = document.getElementsByTagName("input")[5].value;
+    var estanteria = document.getElementsByTagName("input")[6].value;
+    var forat = document.getElementsByTagName("input")[7].value;
+    var buit = new RegExp("^" + " *" + "$");
+
+    if (comprovarCodi() && !buit.test(nom) && comprovarMides() && comprovarPassadis() && comprovarEstanteria() && comprovarForat()) {
+        document.getElementsByTagName("h5")[0].innerHTML = "Família: " + familia;
+        document.getElementsByTagName("h5")[1].innerHTML = "Codi: " + codi;
+        document.getElementsByTagName("h5")[2].innerHTML = "Nom: " + nom;
+        document.getElementsByTagName("h5")[3].innerHTML = "Caracteristiques: " + caracteristiques;
+        document.getElementsByTagName("h5")[4].innerHTML = "Ubicació:";
+        document.getElementsByTagName("p")[1].innerHTML = passadis + " | " + estanteria + " | " + forat        
+    }else{
+        document.getElementsByTagName("h5")[0].innerHTML = "Falta emplenar bé les dades!";
+        document.getElementsByTagName("h5")[1].innerHTML = "";
+        document.getElementsByTagName("h5")[2].innerHTML = "";
+        document.getElementsByTagName("h5")[3].innerHTML = "";
+        document.getElementsByTagName("h5")[4].innerHTML = "";
+        document.getElementsByTagName("p")[1].innerHTML = "";
+    }
+}
+
+function loadAlta() {
+    var alta = document.getElementsByTagName("button")[0];
+    alta.onclick = donarAlta;
 }
