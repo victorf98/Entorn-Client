@@ -99,11 +99,11 @@ function comprovarMides(){
     var alçada = document.getElementsByTagName("input")[4].value;
 
     //comprovar contingut amplada
-    var amplada_correcte = comprovarContingutMides(amplada, 1);
+    var amplada_correcte = comprovarContingutMides(amplada);
     //comprovar contingut llargada
-    var llargada_correcte = comprovarContingutMides(llargada, 2);
+    var llargada_correcte = comprovarContingutMides(llargada);
     //comprovar contingut alçada
-    var alçada_correcte = comprovarContingutMides(alçada, 3);
+    var alçada_correcte = comprovarContingutMides(alçada);
 
     if (amplada_correcte && llargada_correcte && alçada_correcte) {
         document.getElementsByTagName("p")[0].innerHTML = amplada + " x " + llargada + " x " + alçada;
@@ -114,13 +114,11 @@ function comprovarMides(){
     }
 }
 
-function comprovarContingutMides(mida, numero) {
+function comprovarContingutMides(mida) {
     //S'accepta numeros sense o amb decimals(amb coma o punt): 3 | 3,3 | 3.3
     if (/^(\d+|\d+\,\d+|\d+\.\d+)$/.test(mida)) {
-        document.getElementsByTagName("img")[numero].src = "../IMG/tick.png";
         return true;
     }else{
-        document.getElementsByTagName("img")[numero].src = "../IMG/creu.png";
         return false;
     }
 }
@@ -134,10 +132,10 @@ function comprovarPassadis() {
     var passadis = document.getElementsByTagName("input")[5].value;
     var reg_passadis = new RegExp("^" + "P" + "-" + "[0-9]{2}" + "-" + "(E|D)"+ "$");
     if (reg_passadis.test(passadis)) {
-        document.getElementsByTagName("img")[4].src = "../IMG/tick.png";
+        document.getElementsByTagName("img")[1].src = "../IMG/tick.png";
         return true;
     }else{
-        document.getElementsByTagName("img")[4].src = "../IMG/creu.png";
+        document.getElementsByTagName("img")[1].src = "../IMG/creu.png";
         return false;
     }
 }
@@ -151,10 +149,10 @@ function comprovarEstanteria() {
     var estanteria = document.getElementsByTagName("input")[6].value;
     var reg_estanteria = new RegExp("^" + "EST" + "\\+" + "[0-9]{2}" + "\\." + "[0-9]{2}"+ "$");
     if (reg_estanteria.test(estanteria)) {
-        document.getElementsByTagName("img")[5].src = "../IMG/tick.png";
+        document.getElementsByTagName("img")[2].src = "../IMG/tick.png";
         return true;
     }else{
-        document.getElementsByTagName("img")[5].src = "../IMG/creu.png";
+        document.getElementsByTagName("img")[2].src = "../IMG/creu.png";
         return false;
     }
 }
@@ -168,10 +166,10 @@ function comprovarForat() {
     var forat = document.getElementsByTagName("input")[7].value;
     var reg_forat = new RegExp("^" + "[0-9]{2}" + "\\*" + "[A-Z]{3}" + "\\*" + "[0-9]{2}" + "\\\\" + "[0-9]{2}" + "$", "i");
     if (reg_forat.test(forat)) {
-        document.getElementsByTagName("img")[6].src = "../IMG/tick.png";
+        document.getElementsByTagName("img")[3].src = "../IMG/tick.png";
         return true;
     }else{
-        document.getElementsByTagName("img")[6].src = "../IMG/creu.png";
+        document.getElementsByTagName("img")[3].src = "../IMG/creu.png";
         return false;
     }
 }
