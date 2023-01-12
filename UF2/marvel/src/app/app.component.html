@@ -1,0 +1,12 @@
+{{getTitle() | uppercase}}
+
+<ul class="heroes">
+    <li *ngFor="let hero of heroes">
+        <button (click)="onSelect(hero)">
+            <span class="hero_id">{{hero.id}}</span>
+            <span class="hero_name">{{hero.name}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-hero-detail (nameEvent)="eventDisparat($event)" [hero] = "selectedHero"></app-hero-detail>

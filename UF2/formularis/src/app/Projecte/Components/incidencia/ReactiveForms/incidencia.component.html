@@ -1,0 +1,26 @@
+<h1>Incidència RF</h1>
+
+<form [formGroup]="this.incidenciaForm" (ngSubmit)="onSubmit()">
+    <label>Codi:
+        <input type="text" formControlName="codi">
+    </label>
+    <label *ngIf="this.incidenciaForm.controls['codi'].errors?.['required']">
+        El codi és obligatori
+    </label>
+    <label *ngIf="this.incidenciaForm.controls['codi'].errors?.['minlength']">
+        La longitud mínima
+    </label>
+    <label>Títol:
+        <input type="text" formControlName="titol">
+    </label>
+
+    <div formGroupName="responsable">
+        <label>Rol:
+            <input type="text" formControlName="rol">
+        </label>
+        <label *ngIf="this.getControlResponsableRol().invalid">
+            El rol és obligatori
+        </label>
+    </div>
+    <button [disabled]="!this.incidenciaForm.valid">Registrar</button>
+</form>

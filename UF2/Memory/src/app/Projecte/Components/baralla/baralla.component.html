@@ -1,0 +1,5 @@
+<div style="display:flex; flex-direction:row">
+    <div *ngFor="let carta of baralla.cartes let vIndex=index" (click)="triar(baralla)">
+        <app-carta [carta]="carta"></app-carta>
+    </div>
+</div>

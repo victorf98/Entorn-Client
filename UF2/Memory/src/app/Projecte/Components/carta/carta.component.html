@@ -1,0 +1,6 @@
+<span *ngIf="!carta.tapada" (click)="girar(carta)">
+    <img src=".{{this.ruta}}/assets/img/{{carta.img}}" alt="carta" width="100">
+</span>
+<span *ngIf="carta.tapada" (click)="girar(carta)">
+    <img src=".{{this.ruta}}/assets/img/reverse.png" alt="carta" width="100">
+</span>

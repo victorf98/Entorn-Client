@@ -1,0 +1,5 @@
+<h1>{{this.getTaulell().timer}}</h1>
+<h2>Errors: {{this.getTaulell().errors}}</h2>
+<div *ngFor="let baralla of this.getTaulell().baralles" (click)="comprovarEstatTaulell(this.getTaulell())">
+    <app-baralla [baralla]="baralla"></app-baralla>
+</div>
