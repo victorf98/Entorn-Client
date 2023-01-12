@@ -9,20 +9,18 @@ import { userApi } from '../../Serveis/Api/userApi';
 })
 export class UserComponent implements OnInit {
   users!: Array<{ id: number, name: string, email: string, gender: string, status: string }>
-  user: User = new User();
+  user!: User;
 
   constructor(private httpClient: userApi) {
-    /*const user = {
-      name: "Usernou",
-      gender: "Female",
-      email: "email12345@local",
-      status: "active"
-    }*/
+    this.user = new User();
+    this.getAllUsers();
+  }
 
-    this.httpClient.create(this.user).subscribe(data => {
+  guardar(){
+    this.httpClient.create(this.user).subscribe( () => {
+      console.log(this.user);
       this.getAllUsers();
     })
-    this.getAllUsers();
   }
 
   getAllUsers() {

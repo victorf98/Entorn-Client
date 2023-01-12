@@ -14,10 +14,10 @@
         <td>{{user.status}}</td>
     </tr>
     <tr>
-        <td></td>
-        <td><input (ngModel)="this.user.name"></td>
-        <td><input (ngModel)="this.user.email"></td>
-        <td><input (ngModel)="this.user.gender"></td>
-        <td><input (ngModel)="this.user.status"></td>
+        <td><button (click)="guardar()">Guardar</button></td>
+        <td><input [(ngModel)]="this.user.name"></td>
+        <td><input [(ngModel)]="this.user.email"></td>
+        <td><input [(ngModel)]="this.user.gender"></td>
+        <td><input [(ngModel)]="this.user.status"></td>
     </tr>
 </table>

@@ -1,0 +1,8 @@
+<span *ngIf="carta.visible" (click)="agafar(carta)">
+    {{carta.num}} {{carta.pal}}
+    <img src="../../../../assets/img/{{carta.img}}" alt="carta">
+</span>
+<span *ngIf="!carta.visible" (click)="agafar(carta)">
+    <img src="../../../../assets/img/carta_reverse.png" alt="carta">
+</span>
+
