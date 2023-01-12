@@ -1,0 +1,33 @@
+<table *ngIf="this.rubrica.criteris.length > 0">
+    <tr>
+        <th></th>
+        <h3>Valoracions</h3>
+    </tr>
+    <tr>
+        <th>Criteris</th>
+        <th *ngFor="let valor of valors">
+            {{valor}}
+        </th>
+    </tr>
+    <tr *ngFor="let criteri of this.rubrica.criteris let vIndex = index">
+
+        <td><strong>{{criteri.nom}}</strong></td>
+        <td *ngFor="let valor of valors">
+            <div *ngIf="obtenirValoracioPerValor(valor, criteri).valor != null"
+                (click)="seleccionar(obtenirValoracioPerValor(valor, criteri), criteri)" id="valoracio">
+                <div *ngIf="obtenirValoracioPerValor(valor, criteri).seleccionat == true" id="seleccionat">
+                    <label>{{obtenirValoracioPerValor(valor, criteri).descripcio}}</label>
+                </div>
+
+                <div *ngIf="obtenirValoracioPerValor(valor, criteri).seleccionat == false">
+                    <label>{{obtenirValoracioPerValor(valor, criteri).descripcio}}</label>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<label *ngIf="!totsSeleccionats()" style="color: red;">
+    S'ha de votar a tots els criteris.
+</label><br>
+<h3 *ngIf="this.rubrica.criteris.length == 0">No s'ha creat cap criteri encara!</h3>
+<h3 *ngIf="totsSeleccionats() && this.rubrica.criteris.length > 0">Valoració: {{this.rubrica.valoracio}}</h3>

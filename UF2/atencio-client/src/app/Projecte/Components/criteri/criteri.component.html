@@ -1,0 +1,41 @@
+<form [formGroup]="this.criteriForm" (ngSubmit)="registrar()">
+    <label>Criteri:
+        <input type="text" formControlName="nom_criteri">
+    </label>
+    <div formGroupName="valoracio">
+        <label>Descripció:
+            <input type="text" formControlName="descripcio">
+        </label>
+        <label>Valor:
+            <input type="number" formControlName="valor">
+        </label>
+    </div>
+
+    <button type="button" (click)="cancelarCriteri()">Cancelar criteri</button><br>
+    <button type="button" [disabled]="!this.criteriForm.valid" (click)="afegirValoracio()">Afegir Valoracio</button>
+    <label *ngIf="!this.criteriForm.valid" style="color: red;">
+        Els camps "Descripció" i "Valor" han d'estar plens.
+    </label><br>
+    <button type="submit" [disabled]="this.criteriNoGuardat()">Registrar criteri</button>
+    <label *ngIf="this.criteriNoGuardat()" style="color: red;">
+        Hi ha d'haver un valor al camp "Criteri" i al menys una valoració afegida.
+    </label>
+</form>
+
+
+<h2>Criteri en creació</h2>
+<div>
+    <p *ngIf="this.criteriNoGuardat()">Encara no s'ha començat a crear cap criteri.</p>
+    <h3>{{this.criteri.nom}}</h3>
+    <p *ngFor="let valoracio of this.criteri.valoracions">
+        Descripció: {{valoracio.descripcio}} | Valor: {{valoracio.valor}}
+    </p>
+</div>
+
+<h2>Criteris creats</h2>
+<div *ngFor="let criteri of this.rubrica.criteris">
+    <h3>{{criteri.nom}}</h3>
+    <p *ngFor="let valoracio of criteri.valoracions">
+        Descripció: {{valoracio.descripcio}} | Valor: {{valoracio.valor}}
+    </p>
+</div>

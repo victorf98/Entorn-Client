@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 import { User } from '../../Model/Entitats/user';
 import { userApi } from '../../Serveis/Api/userApi';
 
@@ -17,9 +18,19 @@ export class UserComponent implements OnInit {
   }
 
   guardar(){
-    this.httpClient.create(this.user).subscribe( () => {
-      console.log(this.user);
-      this.getAllUsers();
+    /*const apiCall = this.httpClient.create(this.user);
+    apiCall.subscribe();
+    apiCall.subscribe();*/
+
+    this.httpClient.create(this.user).
+    pipe(catchError((err: any) => {
+      console.log(err.error);
+      return throwError(() => new Error("Error en crear l'usuari"))
+    }))
+    .subscribe( {
+      next: (res) => {},
+      error: (err:any) => {console.log(err.message)},
+      complete: () => {this.getAllUsers()}
     })
   }
 
